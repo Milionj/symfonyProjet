@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+<div class="container">
+{% include "components/_search.html.twig" with { form:formView ?? null } only %}
+
+{% if res is defined %}
+{% if res|length <= 1 %}
+<h2>Il y a {{ res|length }} post qui correspond à votre recherche </h2>
+{% else %}
+<h2>Il y a {{ res|length }} posts qui correspondent à votre recherche </h2>
+{% endif %}
+
+{% for post in res %}
+{% include "components/_badge.html.twig" with { categ: post.category } only %}
+    <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+            <a href="{{ path('show', {slug:post.slug})}}" class="btn btn-primary">Voir plus</a>
+{% endfor %}
+    <div class='d-flex justify-content-center'>
+ {{ knp_pagination_render(res, null, {}, {
+    query:params.query,
+    categories:params.categories,
+    page: params.page|default(1)
+ })  }}
+ </div>
+
+{% else %}
+
+{% for post in posts %}
+{% include "components/_badge.html.twig" with { categ: post.category } only %}
+    <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+            <a href="{{ path('show', {slug:post.slug})}}" class="btn btn-primary">Voir plus</a>
+{% endfor %}
+
+ <div class='d-flex justify-content-center'>
+ {{ knp_pagination_render(posts) }}
+ </div>
+ 
+ {% endif %}
+</div>
+
+{% endblock %}

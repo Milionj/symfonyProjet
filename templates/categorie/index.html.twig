@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+
+<h2>{{ posts|length }}</h2>
+
+<ul>
+{% for post in posts %}
+{% include "components/_badge.html.twig" with { categ: post.category } only %}
+<h2 class="fw-bold">{{ post.title }}</h2>
+{{ post.content|striptags|slice(0,100)~"..." }}
+<li>Article {{ post.id }} : <a href="{{ path('show', { slug:post.slug })}}">Voir plus</a></li>
+<hr>
+{% endfor %}
+</ul>
+
+<div class='d-flex justify-content-center'>
+ {{ knp_pagination_render(posts) }}
+ </div>
+{% endblock %}

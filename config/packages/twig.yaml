@@ -1,0 +1,10 @@
+twig:
+    file_name_pattern: '*.twig'
+    form_themes: ['bootstrap_5_layout.html.twig']
+    # définir une variable globale twig pour afficher tte les categ dans index.html.twig
+    globals:
+        categories: '@App\Repository\CategoriesRepository'
+
+when@test:
+    twig:
+        strict_variables: true

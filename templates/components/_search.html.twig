@@ -1,0 +1,13 @@
+{% block body %}
+{% if form  %}
+{{ form_start(form, {'attr':{'data-turbo':'false'}}) }}
+{{ form_widget(form.query) }}
+{{ form_row(form.categories) }}
+{{ form_end(form) }}
+{% endif %}
+{% endblock %}
+
+{# form_row  on affiche tout #} 
+{# form_widget on affiche  juste l'input #}
+{# form_label on affiche que le label #}
+{# form_errors on affiche les erreurs #}

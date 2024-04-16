@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+{% if app.user %}
+<h1>Bonjour {{ app.user.email }}</h1>
+{% else %}
+<h1>Bienvenue sur la page d'accueil</h1>
+{% endif %}
+{% for categ in categs %}
+<h1> {{ categ.title }} </h1>
+{# la methode path permet de faire des liens #}
+<a href="{{ path("details",{id:categ.id}) }}">Voir plus</a>
+{% endfor %}
+
+
+{% endblock %}
